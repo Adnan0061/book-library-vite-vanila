@@ -23,11 +23,13 @@ const homePage = () => {
           <option value="Gender & Sexuality Studies">Gender & Sexuality Studies</option>
           <option value="Literature">Literature</option>
           <option value="Science-Fiction & Fantasy">Science-Fiction & Fantasy</option>
-          <option value="Literature">Literature</option>
-          <option value="Literature">Literature</option>
-          <option value="Literature">Literature</option>
-          <option value="Literature">Literature</option>
-          <option value="Literature">Literature</option>
+          <option value="Gothic">Gothic</option>
+          <option value="Horror">Horror</option>
+          <option value="Monsters">Monsters</option>
+          <option value="Movie Book">Movie Book</option>
+          <option value="Poetry">Poetry</option>
+          <option value="Drama">Drama</option>
+          <option value="Vendetta">Vendetta</option>
         </select>
         
         <select id="sort-filter" class="genre-filter">
@@ -36,6 +38,7 @@ const homePage = () => {
           <option value="descending">descending</option>
         </select>
         <button id="save-filter-btn" class="save-filter-btn" onclick="saveFilters()">Save Filters</button>
+        <button id="clear-filter-btn" class="save-filter-btn" onclick="clearFilters()">Clear Filters</button>
     </div>
 
     <div id="book-list" class="book-list">
@@ -87,16 +90,20 @@ const homePage = () => {
   };
 
   const saveFilters = () => {
-    console.log("save filters");
     const filterParam = formatedUrl.search;
-    console.log(filterParam);
     localStorage.setItem("filterParam", filterParam);
   };
   (window as any).saveFilters = saveFilters;
 
+  const clearFilters = async () => {
+    const updatedBooks = await fetchBooks(baseUrl);
+    renderBooks(updatedBooks, baseUrl);
+    localStorage.setItem("filterParam", "");
+  };
+  (window as any).clearFilters = clearFilters;
+
   // next page function
   const nextPage = async (currentUrl: string, nextPageUrl: string) => {
-    console.log(currentUrl, nextPageUrl);
     const updatedBooks = await fetchBooks(nextPageUrl);
     renderBooks(updatedBooks, nextPageUrl);
   };
@@ -104,7 +111,6 @@ const homePage = () => {
 
   // previous page function
   const previousPage = async (currentUrl: string, previousPage: string) => {
-    console.log(currentUrl, previousPage);
     const updatedBooks = await fetchBooks(previousPage);
     renderBooks(updatedBooks, previousPage);
   };
@@ -112,10 +118,8 @@ const homePage = () => {
 
   // go to page function
   const goToPage = async (currentUrl: string, pageNumber: string) => {
-    console.log(currentUrl, previousPage);
     const url = new URL(currentUrl);
     url.searchParams.set("page", pageNumber.toString());
-    console.log("url", url);
     const updatedBooks = await fetchBooks(url.toString());
     renderBooks(updatedBooks, url.toString());
   };
@@ -253,7 +257,7 @@ const homePage = () => {
               (localStorage.getItem("wishlist") ?? "[]").includes(book.id)
                 ? "red"
                 : "none"
-            }" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            }" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
           </button>

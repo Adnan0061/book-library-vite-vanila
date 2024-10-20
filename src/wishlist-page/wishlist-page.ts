@@ -19,7 +19,6 @@ const wishlistPage = () => {
 
   // next page function
   const nextPage = async (currentUrl: string, nextPageUrl: string) => {
-    console.log(currentUrl, nextPageUrl);
     const updatedBooks = await fetchBooks(nextPageUrl);
     renderBooks(updatedBooks, nextPageUrl);
   };
@@ -27,7 +26,6 @@ const wishlistPage = () => {
 
   // previous page function
   const previousPage = async (currentUrl: string, previousPage: string) => {
-    console.log(currentUrl, previousPage);
     const updatedBooks = await fetchBooks(previousPage);
     renderBooks(updatedBooks, previousPage);
   };
@@ -35,10 +33,8 @@ const wishlistPage = () => {
 
   // go to page function
   const goToPage = async (currentUrl: string, pageNumber: string) => {
-    console.log(currentUrl, previousPage);
     const url = new URL(currentUrl);
     url.searchParams.set("page", pageNumber.toString());
-    console.log("url", url);
     const updatedBooks = await fetchBooks(url.toString());
     renderBooks(updatedBooks, url.toString());
   };

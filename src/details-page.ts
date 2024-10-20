@@ -137,7 +137,6 @@ const detailsPage = (bookId: string) => {
   const appendBooks = async () => {
     const book = await fetchBookDetails(bookId);
     renderBookDetails(book);
-    console.log(book);
   };
 
   appendBooks();
