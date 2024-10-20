@@ -96,9 +96,18 @@ const homePage = () => {
   (window as any).saveFilters = saveFilters;
 
   const clearFilters = async () => {
+    const searchInputDom = document.getElementById("search");
+    const topicFilterDom = document.getElementById("genre-filter");
+    const sortFilterDom = document.getElementById("sort-filter");
+    formatedUrl.searchParams.set("search", "");
+    formatedUrl.searchParams.set("topic", "");
+    formatedUrl.searchParams.set("sort", "");
+    (searchInputDom as HTMLInputElement).value = "";
+    (topicFilterDom as HTMLSelectElement).value = "";
+    (sortFilterDom as HTMLSelectElement).value = "";
+    localStorage.setItem("filterParam", "");
     const updatedBooks = await fetchBooks(baseUrl);
     renderBooks(updatedBooks, baseUrl);
-    localStorage.setItem("filterParam", "");
   };
   (window as any).clearFilters = clearFilters;
 
@@ -288,7 +297,6 @@ const homePage = () => {
     const searchInputDom = document.getElementById("search");
     const topicFilterDom = document.getElementById("genre-filter");
     const sortFilterDom = document.getElementById("sort-filter");
-
     const filterParam = localStorage.getItem("filterParam");
     formatedUrl.search = filterParam || "";
     const searchValue = formatedUrl.searchParams.get("search");
