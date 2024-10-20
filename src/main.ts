@@ -1,9 +1,6 @@
 import router from "./router.ts";
 import "./style.css";
 // const baseUrl = "https://gutendex.com/books";
-import homePage from "./home-page/home-page";
-import wishlistPage from "./wishlist-page/wishlist-page";
-import detailsPage from "./details-page";
 
 const bodyDom = document.querySelector<HTMLDivElement>("body")!;
 // const appDom = document.querySelector<HTMLDivElement>("#app")!;
