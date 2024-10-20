@@ -18,14 +18,14 @@ const wishlistPage = () => {
 `;
 
   // next page function
-  const nextPage = async (currentUrl: string, nextPageUrl: string) => {
+  const nextPage = async (nextPageUrl: string) => {
     const updatedBooks = await fetchBooks(nextPageUrl);
     renderBooks(updatedBooks, nextPageUrl);
   };
   (window as any).nextPage = nextPage;
 
   // previous page function
-  const previousPage = async (currentUrl: string, previousPage: string) => {
+  const previousPage = async (previousPage: string) => {
     const updatedBooks = await fetchBooks(previousPage);
     renderBooks(updatedBooks, previousPage);
   };
@@ -186,13 +186,13 @@ const wishlistPage = () => {
     paginationDom!.innerHTML = `
         ${
           !!books.previous
-            ? `<button id="previous-page" onclick="previousPage('${currentUrl}','${books.previous}')">Previous</button>`
+            ? `<button id="previous-page" onclick="previousPage('${books.previous}')">Previous</button>`
             : ""
         }
         ${pagination()}
         ${
           books.next
-            ? `<button id="next-page" onclick="nextPage('${currentUrl}','${books.next}')">Next</button>`
+            ? `<button id="next-page" onclick="nextPage('${books.next}')">Next</button>`
             : ""
         }
         `;
