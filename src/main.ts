@@ -51,19 +51,14 @@ router();
 main();
 
 // Handle navigation
-document.addEventListener("DOMContentLoaded", () => {
-  window.addEventListener("popstate", () => {
-    router();
-    window.history.pushState({}, "", window.location.pathname);
-  });
-});
+window.addEventListener("popstate", router);
 
 // Intercept link clicks
 
-// document.body.addEventListener("click", (e) => {
-//   if (e.target.matches("a")) {
-//     e.preventDefault();
-//     history.pushState(null, "", e.target.href);
-//     router();
-//   }
-// });
+document.body.addEventListener("click", (e) => {
+  if (e.target instanceof HTMLAnchorElement) {
+    e.preventDefault();
+    history.pushState(null, "", e.target.href);
+    router();
+  }
+});
