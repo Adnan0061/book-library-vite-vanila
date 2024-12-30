@@ -9,7 +9,8 @@ function router() {
   if (path == "/wishlist") return wishlistPageContent();
   if (path.includes("/book/"))
     return detailsPageContent(path.split("/book/")[1]);
-  return notFoundContent();
+  // return notFoundContent();
+  return `<h1>${path}</h1>`;
 }
 
 function notFoundContent() {
