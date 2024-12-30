@@ -45,13 +45,15 @@ export default function main() {
   );
 }
 
-main();
-
 // Initial route
 router();
 
+main();
+
 // Handle navigation
-window.addEventListener("popstate", router);
+document.addEventListener("DOMContentLoaded", () => {
+  window.addEventListener("popstate", router);
+});
 
 // Intercept link clicks
 
