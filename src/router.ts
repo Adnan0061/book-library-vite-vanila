@@ -4,6 +4,7 @@ import detailsPageContent from "./details-page";
 
 function router() {
   const path = window.location.pathname;
+  console.log(path, path.split("/book/")[1]);
   if (path == "/") return homePageContent();
   if (path == "/wishlist") return wishlistPageContent();
   if (path.includes("/book/"))
