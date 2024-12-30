@@ -52,7 +52,10 @@ main();
 
 // Handle navigation
 document.addEventListener("DOMContentLoaded", () => {
-  window.addEventListener("popstate", router);
+  window.addEventListener("popstate", () => {
+    router();
+    window.history.pushState({}, "", window.location.pathname);
+  });
 });
 
 // Intercept link clicks
